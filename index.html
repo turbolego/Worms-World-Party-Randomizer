@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>For Fun Mode Randomizer!</title>
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
+    <link href="favicon.ico" rel="icon" type="image/x-icon">
+    <style>
+        body {
+            font: 14px/1.3 verdana, arial, helvetica, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            font-size: 1.3em;
+        }
+
+        h2 {
+            font-size: 1.2em;
+        }
+
+        a:link {
+            color: #33c;
+        }
+
+        a:visited {
+            color: #339;
+        }
+
+        p {
+            max-width: 60em;
+            margin: auto;
+            display: none;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+
+        #reroll {
+            background: url("roll.png");
+            border: 0;
+            cursor: pointer;
+        }
+
+        a img {
+            border: none;
+        }
+
+        img {
+            max-width: 300px;
+            margin: 10px;
+        }
+
+        button.accordion {
+            background-color: #eee;
+            color: #444;
+            cursor: pointer;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 14px;
+            transition: background-color 0.4s ease;
+        }
+
+        button.accordion.active,
+        button.accordion:hover {
+            background-color: #ccc;
+        }
+
+        div.accordion-panel {
+            display: none;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Image displays here -->
+<div id="imageContainer">
+    <img alt="Random Weapon" id="randomImage1" src="">
+    <img alt="Random Equipment" id="randomImage2" src="">
+</div>
+
+<input
+        alt="Roll Again"
+        id="reroll"
+        onclick="rerollImages()"
+        onkeypress="handleKeyPress(event)"
+        src="roll.png"
+        type="image"
+>
+
+<!-- Accordion section with the title and paragraph -->
+<div id="infoAccordion">
+    <button class="accordion">Show/Hide Instructions</button>
+    <div class="accordion-panel">
+        <h1>"For Fun" Randomizer!</h1>
+        <p>This is a randomizer for the "For Fun" mode in Worms World Party on the Dreamcast!<br>
+            Use this webpage as a "diceroll" to select one weapon and one equipment that the player can use for one turn.<br>
+            The player can also use contents from crates, but only on the turn that the crate was captured.<br>
+            Have fun!</p>
+    </div>
+</div>
+
+<script>
+    const imagesPath = 'images/';
+    const equipPath = 'equip/';
+
+    const images = ['120px-Airstrikeicon.png', '120px-Armageddonicon.png', '120px-Bananaicon.png', '120px-Baseballbaticon.png', '120px-Bazookaicon.png', '120px-Blowtorchicon.png', '120px-Drillicon.png', '120px-Dynamiteicon.png', '120px-Freezeicon.png', '120px-Girderpackicon.png', '120px-Grenadeicon.png', '120px-Holygrenadeicon.png', '120px-IconBazooka.svg.png', '120px-Indiannukeicon.png', '120px-Madcowicon.png', '120px-Magicbulleticon.png', '120px-Mineicon.png', '120px-Minestrikeicon.png', '120px-Mingvaseicon.png', '120px-Minigunicon.png', '120px-Prodicon.png', '120px-Quakeicon.png', '120px-Scalesofjusticeicon.png', '120px-Sheepicon.png', '120px-Shotgunicon.png', '120px-Skunkicon.png', '120px-Superbananaicon.png', 'Battleaxeicon.png', 'Carpetbombicon.png', 'Clusterbombicon.png', 'Donkeyicon.png', 'Dragonballicon.png', 'Firepunchicon.png', 'Girdericon.png', 'Handgunicon.png', 'Homissileicon.png', 'Kamikazeicon.png', 'Mailstrikeicon.png', 'Mbbombicon.png', 'Molebombicon.png', 'Molesquadronicon.png', 'Mortaricon.png', 'Oldwomanicon.png', 'Pigeonicon.png', 'Sallyarmyicon.png', 'Sheeplaunchicon.png', 'Sheepstrikeicon.png', 'Skipgoicon.png', 'Suicidebombicon.png', 'Supersheepicon.png', 'Surrendericon.png', 'Teleporticon.png', 'Uziicon.png'];
+
+    const equips = ['120px-Bungeeicon.png', '120px-Ninjaropeicon.png', 'Parachuteicon.png', 'Selectwormicon.png'];
+
+    function getRandomImage(imagesArray) {
+        const randomIndex = Math.floor(Math.random() * imagesArray.length);
+        return imagesArray[randomIndex];
+    }
+
+    function rerollImages() {
+        const randomImage1 = getRandomImage(images);
+        const randomImage2 = getRandomImage(equips);
+
+        document.getElementById('randomImage1').src = imagesPath + randomImage1;
+        document.getElementById('randomImage2').src = equipPath + randomImage2;
+    }
+
+    // Function to handle key press events
+    function handleKeyPress(event) {
+        // Check if the Enter key is pressed (key code 13)
+        if (event.keyCode === 13) {
+            rerollImages();
+        }
+    }
+
+    // Initial load
+    rerollImages();
+
+    // Accordion toggle functionality
+    const accordion = document.querySelector('.accordion');
+    const panel = document.querySelector('.accordion-panel');
+
+    accordion.addEventListener('click', function() {
+        this.classList.toggle('active');
+        panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    });
+</script>
+</body>
+</html>
