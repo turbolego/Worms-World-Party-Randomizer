@@ -102,7 +102,7 @@
     <img alt="Random Equipment" id="randomImage2" src="">
 
     <!-- Row 3: Reroll Button -->
-    <input alt="Roll Again" id="reroll" onclick="rerollImages()" onkeypress="handleKeyPress(event)" src="roll.png"
+    <input alt="Roll Again" id="reroll" onclick="rerollImages()" onkeydown="handleKeyPress(event)" src="roll.png"
            type="image">
 
     <!-- Row 4: Accordion Section -->
@@ -141,11 +141,13 @@
 
     // Function to handle key press events
     function handleKeyPress(event) {
-        // Check if the Enter key is pressed (key code 13)
-        if (event.keyCode === 13) {
+        if (event.key === 'Enter') {
             rerollImages();
         }
     }
+
+    // Add event listener to the document for key presses
+    document.getElementById('reroll').addEventListener('keydown', handleKeyPress);
 
     // Initial load
     rerollImages();
